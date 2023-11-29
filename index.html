@@ -28,7 +28,14 @@
     const bg = PIXI.Sprite.from('./images/bg.jpg')
     bg.width = app.screen.width
     bg.height = app.screen.height
+
     app.stage.addChild(bg)
+    init().then(() => {
+      loadEnemy()
+      setInterval(() => {
+        loadEnemy()
+      }, 3000);
+    })
 
 
     const ActionMap = {
@@ -41,10 +48,7 @@
       throw: animateGroup("Throw"),
       jumpThrow: animateGroup("Jump_Throw"),
     }
-    loadEnemy()
-    setInterval(() => {
-      loadEnemy()
-    }, 15000);
+
 
     // 飞镖的集合
     let Darts = []

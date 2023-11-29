@@ -10,7 +10,7 @@ function randomEnemyName() {
 
 async function loadEnemy() {
   const name = randomEnemyName();
-  const sheet = await PIXI.Assets.load(`images/${name}.json`);
+  const sheet = AssetsCache[name];
   const anim = new PIXI.AnimatedSprite(sheet.animations[name]);
   // 随机产生 0 或者 1
   const r = Math.round(Math.random());
@@ -30,7 +30,7 @@ async function loadEnemy() {
 
 async function loadSmoke(x, y) {
   const name = 'smoke';
-  const sheet = await PIXI.Assets.load(`images/${name}.json`);
+  const sheet = AssetsCache[name];
   const anim = new PIXI.AnimatedSprite(sheet.animations[name]);
 
   // set the animation speed
