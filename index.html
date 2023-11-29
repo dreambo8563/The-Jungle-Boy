@@ -143,12 +143,16 @@
 
       // 控制飞镖
       Darts.forEach((dart, index) => {
-        if (KillingMap[dart.id]) {
+        if (KillingWeaponMap[dart.id]) {
           return
         }
         enemies.forEach(async (enemy, index) => {
+          if (KilledEnemyMap[enemy.id]) {
+            return
+          }
           if (checkHit(dart, enemy)) {
-            KillingMap[dart.id] = true
+            KillingWeaponMap[dart.id] = true
+            KilledEnemyMap[enemy.id] = true
             // 杀死敌人效果
             await loadSmoke(dart.x, dart.y)
             app.stage.removeChild(dart)

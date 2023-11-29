@@ -35,7 +35,7 @@ function createDart() {
   const r = PIXI.Sprite.from(`./images/Kunai.png`);
   r.x = current.x;
   r.y = current.y;
-  r.id = new Date().getTime();
+  r.id = 'dart' + new Date().getTime();
   r.anchor.set(0.5);
   r.angle = 90;
   r.scale.set(0.3);

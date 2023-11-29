@@ -1,5 +1,6 @@
 let enemies = [];
-const KillingMap = {};
+const KillingWeaponMap = {};
+const KilledEnemyMap = {};
 
 function randomEnemyName() {
   const names = ['bat'];
@@ -21,7 +22,7 @@ async function loadBat() {
   anim.y = r == 0 ? app.screen.height - 200 : app.screen.height - 200 - 50;
   // play the animation on a loop
   anim.play();
-  anim.id = new Date().getTime();
+  anim.id = 'enemy' + new Date().getTime();
   // add it to the stage to render
   app.stage.addChild(anim);
   enemies.push(anim);
