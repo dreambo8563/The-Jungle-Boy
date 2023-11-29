@@ -3,6 +3,7 @@
 
 <head>
   <script src="./pixi.js"></script>
+  <script src="https://unpkg.com/@pixi/sound/dist/pixi-sound.js"></script>
   <script src="./utils.js"></script>
   <script src="./events.js"></script>
   <script src="./enemy.js"></script>
@@ -28,7 +29,13 @@
     const bg = PIXI.Sprite.from('./images/bg.jpg')
     bg.width = app.screen.width
     bg.height = app.screen.height
+    PIXI.sound.add('stage1', {
+      url: './sound/stage1.wav',
+      loop: true,
 
+    });
+
+    PIXI.sound.play('stage1');
     app.stage.addChild(bg)
     init().then(() => {
       loadEnemy()
