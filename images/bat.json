@@ -1,0 +1,166 @@
+{
+  "frames": {
+    "Bat_Fly-0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-1": {
+      "frame": {
+        "x": 46,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 46,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-2": {
+      "frame": {
+        "x": 92,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 92,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-3": {
+      "frame": {
+        "x": 138,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 138,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-4": {
+      "frame": {
+        "x": 184,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 184,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-5": {
+      "frame": {
+        "x": 230,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 230,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    },
+    "Bat_Fly-6": {
+      "frame": {
+        "x": 276,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 276,
+        "y": 0,
+        "w": 46,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 30
+      }
+    }
+  },
+  "meta": {
+    "app": "sprite-sheet-to-json",
+    "version": "1.0.0",
+    "image": "bat.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 322,
+      "h": 30
+    },
+    "scale": "1"
+  },
+  "animations": {
+    "bat": [
+      "Bat_Fly-0",
+      "Bat_Fly-1",
+      "Bat_Fly-2",
+      "Bat_Fly-3",
+      "Bat_Fly-4",
+      "Bat_Fly-5",
+      "Bat_Fly-6"
+    ]
+  }
+}

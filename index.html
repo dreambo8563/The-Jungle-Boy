@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="./pixi.js"></script>
+  <script src="./utils.js"></script>
+  <script src="./enemy.js"></script>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    overflow: hidden;
+  }
+</style>
+
+<body>
+  <script>
+    // Create the application helper and add its render target to the page
+    let app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+    document.body.appendChild(app.view);
+
+    const bg = PIXI.Sprite.from('./images/bg.jpg')
+    bg.width = app.screen.width
+    bg.height = app.screen.height
+    app.stage.addChild(bg)
+
+
+    const ActionMap = {
+      idle: animateGroup("Idle"),
+      runs: animateGroup("Run"),
+      jumps: animateGroup("Jump"),
+      slide: animateGroup("Slide"),
+      attack: animateGroup("Attack"),
+      jumpAttack: animateGroup("Jump_Attack"),
+      throw: animateGroup("Throw"),
+      jumpThrow: animateGroup("Jump_Throw"),
+    }
+    loadBat()
+    // 飞镖的集合
+    const Darts = []
+    let current = loadAction(window.innerWidth / 2, app.screen.height - 200, "idle")
+
+    app.stage.addChild(current);
+
+    //Capture the keyboard arrow keys
+    const left = keyboard("ArrowLeft"),
+      up = keyboard("ArrowUp"),
+      right = keyboard("ArrowRight"),
+      down = keyboard("ArrowDown"),
+      a = keyboard("a"),
+      s = keyboard("s"),
+      d = keyboard("d"),
+      f = keyboard("f");
+
+    a.press = () => {
+      if (['slide', 'jumps', 'attack', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("attack")
+        duration = 0
+      }
+    }
+    s.press = () => {
+      if (['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("jumpAttack")
+        duration = 0
+      }
+    }
+    d.press = () => {
+      if (['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("throw")
+        duration = 0
+        Darts.push(createDart())
+      }
+    }
+
+    f.press = () => {
+      if (['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("jumpThrow")
+        duration = 0
+      }
+    }
+
+    //Left arrow key `press` method
+    left.press = () => {
+      if (current.name === 'idle') {
+        switchToAction("runs")
+      }
+      if (current.x > 0) {
+        current.x -= 5;
+      }
+    };
+    left.release = () => {
+      if (['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("idle")
+      }
+    }
+
+    //Left arrow key `press` method
+    right.press = () => {
+      if (current.name === 'idle') {
+        switchToAction("runs")
+      }
+
+      if (current.x < window.innerWidth) {
+        current.x += 5;
+      }
+    };
+    right.release = () => {
+      if (['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1) {
+        switchToAction("idle")
+      }
+    }
+
+    let duration = 0
+    //Left arrow key `press` method
+    up.press = () => {
+      if (current.name !== 'jumps' && current.name !== 'jumpAttack' && current.name !== 'jumpThrow') {
+        switchToAction("jumps")
+        duration = 0
+      }
+    };
+
+
+    down.press = () => {
+      if (current.name !== 'slide' && current.name !== 'jumps' && current.name !== 'jumpAttack' && current.name !== 'jumpThrow') {
+        switchToAction("slide")
+        duration = 0
+      }
+    }
+
+
+    // // Listen for frame updates
+    app.ticker.add(() => {
+      if (left.isDown) {
+        left.press();
+      }
+      if (right.isDown) {
+        right.press();
+      }
+
+      if (current.name === 'jumps') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        if (duration < 10) {
+          current.y -= 5
+          current.x += 5
+        }
+        if (duration >= 10 && duration < 20) {
+          current.y += 5
+          current.x += 5
+        }
+
+        current.x = Math.min(current.x, window.innerWidth)
+        duration++
+      }
+      if (current.name === 'slide') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        if (duration < 10) {
+          current.x += 5
+        }
+        if (duration >= 10 && duration < 20) {
+          current.x += 2
+        }
+        current.x = Math.min(current.x, window.innerWidth)
+        duration++
+      }
+      if (current.name === 'attack') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        duration++
+      }
+      if (current.name === 'throw') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        duration++
+      }
+      if (current.name === 'jumpAttack') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        if (duration < 10) {
+          current.y -= 5
+          current.x += 5
+        }
+        if (duration >= 10 && duration < 20) {
+          current.y += 5
+          current.x += 5
+        }
+
+        current.x = Math.min(current.x, window.innerWidth)
+        duration++
+      }
+
+      if (current.name === 'jumpThrow') {
+        if (duration >= 20) {
+          switchToAction("idle")
+          return
+        }
+        if (duration < 10) {
+          current.y -= 5
+        }
+        if (duration === 10) {
+          Darts.push(createDart())
+          current.y += 5
+        }
+        if (duration > 10 && duration < 20) {
+          current.y += 5
+        }
+
+        current.x = Math.min(current.x, window.innerWidth)
+        duration++
+      }
+
+      // 控制飞镖
+      Darts.forEach((dart, index) => {
+        enemies.forEach(async (enemy, index) => {
+          if (checkHit(dart, enemy)) {
+            // 杀死敌人效果
+            await loadSmoke(dart.x, dart.y)
+            app.stage.removeChild(dart)
+            Darts.splice(index, 1)
+            app.stage.removeChild(enemy)
+            enemies.splice(index, 1)
+
+          }
+        })
+        if (dart.x > window.innerWidth) {
+          app.stage.removeChild(dart)
+          Darts.splice(index, 1)
+        } else {
+          dart.x += 10
+        }
+      })
+
+      enemies.forEach((enemy, index) => {
+        if (enemy.x < 0) {
+          app.stage.removeChild(enemy)
+          enemies.splice(index, 1)
+        } else {
+          enemy.x -= 1
+        }
+      })
+
+    })
+  </script>
+</body>
+
+</html>
