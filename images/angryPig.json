@@ -1,0 +1,271 @@
+{
+  "frames": {
+    "AngryPig-0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-1": {
+      "frame": {
+        "x": 36,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 36,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-2": {
+      "frame": {
+        "x": 72,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 72,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-3": {
+      "frame": {
+        "x": 108,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 108,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-4": {
+      "frame": {
+        "x": 144,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 144,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-5": {
+      "frame": {
+        "x": 180,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 180,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-6": {
+      "frame": {
+        "x": 216,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 216,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-7": {
+      "frame": {
+        "x": 252,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 252,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-8": {
+      "frame": {
+        "x": 288,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 288,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-9": {
+      "frame": {
+        "x": 324,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 324,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-10": {
+      "frame": {
+        "x": 360,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 360,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    },
+    "AngryPig-11": {
+      "frame": {
+        "x": 396,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 396,
+        "y": 0,
+        "w": 36,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 432,
+        "h": 30
+      }
+    }
+  },
+  "meta": {
+    "app": "sprite-sheet-to-json",
+    "version": "1.0.0",
+    "image": "angryPig.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 432,
+      "h": 30
+    },
+    "scale": "1"
+  },
+  "animations": {
+    "angryPig": [
+      "AngryPig-0",
+      "AngryPig-1",
+      "AngryPig-2",
+      "AngryPig-3",
+      "AngryPig-4",
+      "AngryPig-5",
+      "AngryPig-6",
+      "AngryPig-7",
+      "AngryPig-8",
+      "AngryPig-9",
+      "AngryPig-10",
+      "AngryPig-11"
+    ]
+  }
+}

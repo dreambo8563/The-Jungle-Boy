@@ -1,7 +1,7 @@
 let enemies = [];
 const KillingWeaponMap = {};
 const KilledEnemyMap = {};
-const names = ['bat'];
+const names = ['bat', 'angryPig', 'rock', 'blueBird', 'bunny', 'mushroom'];
 
 function randomEnemyName() {
   const r = Math.floor(Math.random() * names.length);

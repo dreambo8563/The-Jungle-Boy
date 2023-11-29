@@ -1,0 +1,271 @@
+{
+  "frames": {
+    "Bunny-0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-1": {
+      "frame": {
+        "x": 34,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-2": {
+      "frame": {
+        "x": 68,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 68,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-3": {
+      "frame": {
+        "x": 102,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 102,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-4": {
+      "frame": {
+        "x": 136,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 136,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-5": {
+      "frame": {
+        "x": 170,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 170,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-6": {
+      "frame": {
+        "x": 204,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 204,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-7": {
+      "frame": {
+        "x": 238,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-8": {
+      "frame": {
+        "x": 272,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 272,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-9": {
+      "frame": {
+        "x": 306,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 306,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-10": {
+      "frame": {
+        "x": 340,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 340,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    },
+    "Bunny-11": {
+      "frame": {
+        "x": 374,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 374,
+        "y": 0,
+        "w": 34,
+        "h": 44
+      },
+      "sourceSize": {
+        "w": 408,
+        "h": 44
+      }
+    }
+  },
+  "meta": {
+    "app": "sprite-sheet-to-json",
+    "version": "1.0.0",
+    "image": "bunny.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 408,
+      "h": 44
+    },
+    "scale": "1"
+  },
+  "animations": {
+    "bunny": [
+      "Bunny-0",
+      "Bunny-1",
+      "Bunny-2",
+      "Bunny-3",
+      "Bunny-4",
+      "Bunny-5",
+      "Bunny-6",
+      "Bunny-7",
+      "Bunny-8",
+      "Bunny-9",
+      "Bunny-10",
+      "Bunny-11"
+    ]
+  }
+}
