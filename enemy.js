@@ -1,14 +1,14 @@
 let enemies = [];
 const KillingWeaponMap = {};
 const KilledEnemyMap = {};
+const names = ['bat'];
 
 function randomEnemyName() {
-  const names = ['bat'];
   const r = Math.floor(Math.random() * names.length);
   return names[r];
 }
 
-async function loadBat() {
+async function loadEnemy() {
   const name = randomEnemyName();
   const sheet = await PIXI.Assets.load(`images/${name}.json`);
   const anim = new PIXI.AnimatedSprite(sheet.animations[name]);

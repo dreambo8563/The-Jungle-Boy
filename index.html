@@ -6,6 +6,7 @@
   <script src="./utils.js"></script>
   <script src="./events.js"></script>
   <script src="./enemy.js"></script>
+  <script src="./initLoad.js"></script>
 </head>
 <style>
   * {
@@ -40,7 +41,11 @@
       throw: animateGroup("Throw"),
       jumpThrow: animateGroup("Jump_Throw"),
     }
-    loadBat()
+    loadEnemy()
+    setInterval(() => {
+      loadEnemy()
+    }, 15000);
+
     // 飞镖的集合
     let Darts = []
     let current = loadAction(window.innerWidth / 2, app.screen.height - 200, "idle")
@@ -51,6 +56,36 @@
 
     // // Listen for frame updates
     app.ticker.add(() => {
+
+      // 控制飞镖
+      Darts.forEach((dart, index) => {
+        if (KillingWeaponMap[dart.id]) {
+          return
+        }
+        enemies.forEach(async (enemy, index) => {
+          if (KilledEnemyMap[enemy.id] || enemy.y != dart.y) {
+            return
+          }
+          if (checkHit(dart, enemy)) {
+            KillingWeaponMap[dart.id] = true
+            KilledEnemyMap[enemy.id] = true
+            // 杀死敌人效果
+            await loadSmoke(dart.x, dart.y)
+            app.stage.removeChild(dart)
+            Darts = Darts.filter(item => item.id !== dart.id)
+            app.stage.removeChild(enemy)
+            enemies = enemies.filter(item => item.id !== enemy.id)
+          }
+        })
+        if (dart.x > window.innerWidth) {
+          app.stage.removeChild(dart)
+          Darts.splice(index, 1)
+        } else {
+          dart.x += 10
+        }
+      })
+
+
       if (left.isDown) {
         left.press();
       }
@@ -141,33 +176,6 @@
         duration++
       }
 
-      // 控制飞镖
-      Darts.forEach((dart, index) => {
-        if (KillingWeaponMap[dart.id]) {
-          return
-        }
-        enemies.forEach(async (enemy, index) => {
-          if (KilledEnemyMap[enemy.id]) {
-            return
-          }
-          if (checkHit(dart, enemy)) {
-            KillingWeaponMap[dart.id] = true
-            KilledEnemyMap[enemy.id] = true
-            // 杀死敌人效果
-            await loadSmoke(dart.x, dart.y)
-            app.stage.removeChild(dart)
-            Darts = Darts.filter(item => item.id !== dart.id)
-            app.stage.removeChild(enemy)
-            enemies = enemies.filter(item => item.id !== enemy.id)
-          }
-        })
-        if (dart.x > window.innerWidth) {
-          app.stage.removeChild(dart)
-          Darts.splice(index, 1)
-        } else {
-          dart.x += 10
-        }
-      })
 
       enemies.forEach((enemy, index) => {
         if (enemy.x < 0) {
