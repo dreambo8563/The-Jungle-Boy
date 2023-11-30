@@ -69,31 +69,32 @@
     app.ticker.add(() => {
 
       // 控制飞镖
-      Darts.forEach((dart, index) => {
+      Darts.forEach(async (dart, index) => {
         if (KillingWeaponMap[dart.id]) {
           return
         }
-        enemies.forEach(async (enemy, index) => {
-          if (KilledEnemyMap[enemy.id] || enemy.y != dart.y) {
-            return
-          }
-          if (checkHit(dart, enemy)) {
-            KillingWeaponMap[dart.id] = true
-            KilledEnemyMap[enemy.id] = true
-            // 杀死敌人效果
-            await loadSmoke(dart.x, dart.y)
-            app.stage.removeChild(dart)
-            Darts = Darts.filter(item => item.id !== dart.id)
-            app.stage.removeChild(enemy)
-            enemies = enemies.filter(item => item.id !== enemy.id)
-          }
+        const i = enemies.findIndex(enemy => {
+          return !KilledEnemyMap[enemy.id] && enemy.y === dart.y && checkHit(dart, enemy)
         })
-        if (dart.x > window.innerWidth) {
-          app.stage.removeChild(dart)
-          Darts.splice(index, 1)
-        } else {
-          dart.x += 10
+        if (i == -1) {
+          if (dart.x > window.innerWidth) {
+            app.stage.removeChild(dart)
+            Darts.splice(index, 1)
+          } else {
+            dart.x += 10
+          }
+          return
         }
+        KillingWeaponMap[dart.id] = true
+        KilledEnemyMap[enemies[i].id] = true
+        // 杀死敌人效果
+        await loadSmoke(dart.x, dart.y)
+        app.stage.removeChild(dart)
+        Darts = Darts.filter(item => item.id !== dart.id)
+        app.stage.removeChild(enemies[i])
+        enemies = enemies.filter(item => item.id !== enemies[i].id)
+
+
       })
 
 
