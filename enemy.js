@@ -19,7 +19,10 @@ async function loadEnemy() {
   anim.animationSpeed = 0.1666;
   anim.x = enemyStart();
   // 随机高位,普通位置敌人
-  anim.y = r == 0 ? app.screen.height - 200 : app.screen.height - 200 - 50;
+  anim.y =
+    r == 0
+      ? groundPosition - NinjaProps.height / 2
+      : groundPosition - NinjaProps.height;
   // play the animation on a loop
   anim.play();
   anim.id = 'enemy' + new Date().getTime();

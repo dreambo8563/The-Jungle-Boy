@@ -7,15 +7,16 @@ const left = keyboard('ArrowLeft'),
   s = keyboard('s'),
   d = keyboard('d'),
   f = keyboard('f');
-
+let jumpFromY = 0;
+let jumpDirection = 'up';
 a.press = () => {
   if (
     ['slide', 'jumps', 'attack', 'jumpAttack', 'jumpThrow'].indexOf(
       current.name
     ) === -1
   ) {
-    switchToAction('attack');
     duration = 0;
+    switchToAction('attack');
   }
 };
 s.press = () => {
@@ -23,15 +24,16 @@ s.press = () => {
     ['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1
   ) {
     switchToAction('jumpAttack');
-    duration = 0;
+    jumpFromY = current.y;
+    jumpDirection = 'up';
   }
 };
 d.press = () => {
   if (
     ['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1
   ) {
-    switchToAction('throw');
     duration = 0;
+    switchToAction('throw');
     Darts.push(createDart());
   }
 };
@@ -41,7 +43,8 @@ f.press = () => {
     ['slide', 'jumps', 'jumpAttack', 'jumpThrow'].indexOf(current.name) === -1
   ) {
     switchToAction('jumpThrow');
-    duration = 0;
+    jumpFromY = current.y;
+    jumpDirection = 'up';
   }
 };
 
@@ -88,7 +91,8 @@ up.press = () => {
     current.name !== 'jumpThrow'
   ) {
     switchToAction('jumps');
-    duration = 0;
+    jumpDirection = 'up';
+    jumpFromY = current.y;
   }
 };
 

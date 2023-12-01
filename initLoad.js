@@ -7,4 +7,5 @@ async function init() {
     const n = await PIXI.Assets.load(`images/${name}.json`);
     AssetsCache[name] = n;
   }
+  await createMap();
 }

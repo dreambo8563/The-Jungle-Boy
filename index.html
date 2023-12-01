@@ -5,8 +5,10 @@
   <script src="./pixi.js"></script>
   <script src="https://unpkg.com/@pixi/sound/dist/pixi-sound.js"></script>
   <script src="./utils.js"></script>
+  <script src="./position.js"></script>
   <script src="./events.js"></script>
   <script src="./enemy.js"></script>
+  <script src="./map.js"></script>
   <script src="./initLoad.js"></script>
 </head>
 <style>
@@ -23,12 +25,16 @@
 <body>
   <script>
     // Create the application helper and add its render target to the page
-    let app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+    let app = new PIXI.Application({ background: '#1099bb', resizeTo: window, hello: true });
     document.body.appendChild(app.view);
 
-    const bg = PIXI.Sprite.from('./images/bg.jpg')
+    const bg = PIXI.Sprite.from('./images/bg/BG.png')
     bg.width = app.screen.width
     bg.height = app.screen.height
+    window.addEventListener('resize', () => {
+      bg.width = app.screen.width
+      bg.height = app.screen.height
+    })
     PIXI.sound.add('stage1', {
       url: './sound/stage1.wav',
       loop: true,
@@ -37,168 +43,166 @@
 
     PIXI.sound.play('stage1');
     app.stage.addChild(bg)
+    let current = null;
+    let duration = 0;
+    // 飞镖的集合
+    let Darts = []
     init().then(() => {
       loadEnemy()
+      console.log(groundPosition, NinjaProps);
+      current = loadAction(100, groundPosition, "idle")
+
+      app.stage.addChild(current);
+
+      // // Listen for frame updates
+      app.ticker.add(() => {
+
+        // 控制飞镖
+        Darts.forEach(async (dart, index) => {
+          if (KillingWeaponMap[dart.id]) {
+            return
+          }
+          const i = enemies.findIndex(enemy => {
+            return !KilledEnemyMap[enemy.id] && enemy.y === dart.y && checkHit(dart, enemy)
+          })
+          if (i == -1) {
+            if (dart.x > window.innerWidth) {
+              app.stage.removeChild(dart)
+              Darts.splice(index, 1)
+            } else {
+              dart.x += 10
+            }
+            return
+          }
+          KillingWeaponMap[dart.id] = true
+          KilledEnemyMap[enemies[i].id] = true
+          // 杀死敌人效果
+          await loadSmoke(dart.x, dart.y)
+          app.stage.removeChild(dart)
+          Darts = Darts.filter(item => item.id !== dart.id)
+          app.stage.removeChild(enemies[i])
+          enemies = enemies.filter(item => item.id !== enemies[i].id)
+
+
+        })
+
+
+        if (left.isDown) {
+          left.press();
+        }
+        if (right.isDown) {
+          right.press();
+        }
+
+        if (current.name === 'jumps') {
+          if (current.y > groundPosition) {
+            current.y = groundPosition
+            switchToAction("idle")
+            return
+          }
+          if (jumpDirection === 'up') {
+            current.y -= 5
+          }
+          if (current.y <= jumpFromY - NinjaProps.height / 2 && jumpDirection == 'up') {
+            current.y = jumpFromY - NinjaProps.height / 2
+            current.y += 5
+            jumpDirection = 'down'
+          }
+          if (jumpDirection === 'down') {
+            current.y += 5
+          }
+        }
+        if (current.name === 'slide') {
+          if (duration >= 20) {
+            switchToAction("idle")
+            return
+          }
+          if (duration < 10) {
+            current.x += 5
+          }
+          if (duration >= 10 && duration < 20) {
+            current.x += 2
+          }
+          duration++
+        }
+        if (current.name === 'attack') {
+          current.y = groundPosition + 10
+          if (duration >= 20) {
+            current.y = groundPosition
+            switchToAction("idle")
+            return
+          }
+          duration++
+        }
+        if (current.name === 'throw') {
+          if (duration >= 20) {
+            switchToAction("idle")
+            return
+          }
+          duration++
+        }
+        if (current.name === 'jumpAttack') {
+          if (current.y > groundPosition) {
+            current.y = groundPosition
+            switchToAction("idle")
+            return
+          }
+          if (jumpDirection == 'up') {
+            current.y -= 5
+            current.x += 5
+          }
+          if (current.y <= jumpFromY - NinjaProps.height / 2 && jumpDirection == 'up') {
+            current.y = jumpFromY - NinjaProps.height / 2
+            current.y += 5
+            jumpDirection = 'down'
+            current.x += 5
+          }
+          if (jumpDirection === 'down') {
+            current.y += 5
+            current.x += 5
+          }
+
+
+        }
+
+        if (current.name === 'jumpThrow') {
+          if (current.y > groundPosition) {
+            current.y = groundPosition
+            switchToAction("idle")
+            return
+          }
+          if (jumpDirection == 'up') {
+            current.y -= 5
+          }
+          if (current.y <= jumpFromY - NinjaProps.height / 2 && jumpDirection == 'up') {
+            current.y = jumpFromY - NinjaProps.height / 2
+            Darts.push(createDart())
+            jumpDirection = 'down'
+            current.y += 5
+          }
+          if (jumpDirection === 'down') {
+            current.y += 5
+          }
+        }
+        current.x = Math.min(current.x, window.innerWidth)
+
+
+        enemies.forEach((enemy, index) => {
+          if (enemy.x < 0) {
+            app.stage.removeChild(enemy)
+            enemies.splice(index, 1)
+          } else {
+            enemy.x -= 1
+          }
+        })
+
+      })
       setInterval(() => {
         loadEnemy()
       }, 1000);
     })
 
 
-    const ActionMap = {
-      idle: animateGroup("Idle"),
-      runs: animateGroup("Run"),
-      jumps: animateGroup("Jump"),
-      slide: animateGroup("Slide"),
-      attack: animateGroup("Attack"),
-      jumpAttack: animateGroup("Jump_Attack"),
-      throw: animateGroup("Throw"),
-      jumpThrow: animateGroup("Jump_Throw"),
-    }
-
-
-    // 飞镖的集合
-    let Darts = []
-    let current = loadAction(window.innerWidth / 2, app.screen.height - 200, "idle")
-
-    app.stage.addChild(current);
-
-    let duration = 0
-
-    // // Listen for frame updates
-    app.ticker.add(() => {
-
-      // 控制飞镖
-      Darts.forEach(async (dart, index) => {
-        if (KillingWeaponMap[dart.id]) {
-          return
-        }
-        const i = enemies.findIndex(enemy => {
-          return !KilledEnemyMap[enemy.id] && enemy.y === dart.y && checkHit(dart, enemy)
-        })
-        if (i == -1) {
-          if (dart.x > window.innerWidth) {
-            app.stage.removeChild(dart)
-            Darts.splice(index, 1)
-          } else {
-            dart.x += 10
-          }
-          return
-        }
-        KillingWeaponMap[dart.id] = true
-        KilledEnemyMap[enemies[i].id] = true
-        // 杀死敌人效果
-        await loadSmoke(dart.x, dart.y)
-        app.stage.removeChild(dart)
-        Darts = Darts.filter(item => item.id !== dart.id)
-        app.stage.removeChild(enemies[i])
-        enemies = enemies.filter(item => item.id !== enemies[i].id)
-
-
-      })
-
-
-      if (left.isDown) {
-        left.press();
-      }
-      if (right.isDown) {
-        right.press();
-      }
-
-      if (current.name === 'jumps') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        if (duration < 10) {
-          current.y -= 5
-          current.x += 5
-        }
-        if (duration >= 10 && duration < 20) {
-          current.y += 5
-          current.x += 5
-        }
-
-        current.x = Math.min(current.x, window.innerWidth)
-        duration++
-      }
-      if (current.name === 'slide') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        if (duration < 10) {
-          current.x += 5
-        }
-        if (duration >= 10 && duration < 20) {
-          current.x += 2
-        }
-        current.x = Math.min(current.x, window.innerWidth)
-        duration++
-      }
-      if (current.name === 'attack') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        duration++
-      }
-      if (current.name === 'throw') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        duration++
-      }
-      if (current.name === 'jumpAttack') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        if (duration < 10) {
-          current.y -= 5
-          current.x += 5
-        }
-        if (duration >= 10 && duration < 20) {
-          current.y += 5
-          current.x += 5
-        }
-
-        current.x = Math.min(current.x, window.innerWidth)
-        duration++
-      }
-
-      if (current.name === 'jumpThrow') {
-        if (duration >= 20) {
-          switchToAction("idle")
-          return
-        }
-        if (duration < 10) {
-          current.y -= 5
-        }
-        if (duration === 10) {
-          Darts.push(createDart())
-          current.y += 5
-        }
-        if (duration > 10 && duration < 20) {
-          current.y += 5
-        }
-
-        current.x = Math.min(current.x, window.innerWidth)
-        duration++
-      }
-
-
-      enemies.forEach((enemy, index) => {
-        if (enemy.x < 0) {
-          app.stage.removeChild(enemy)
-          enemies.splice(index, 1)
-        } else {
-          enemy.x -= 1
-        }
-      })
-
-    })
   </script>
 </body>
 

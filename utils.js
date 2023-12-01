@@ -1,15 +1,27 @@
-function enemyStart() {
-  return app.screen.width - 100;
-}
+const NinjaProps = {
+  height: 100,
+};
+const DartProps = {
+  width: 50,
+};
+const ActionMap = {
+  idle: animateGroup('Idle'),
+  runs: animateGroup('Run'),
+  jumps: animateGroup('Jump'),
+  slide: animateGroup('Slide'),
+  attack: animateGroup('Attack'),
+  jumpAttack: animateGroup('Jump_Attack'),
+  throw: animateGroup('Throw'),
+  jumpThrow: animateGroup('Jump_Throw'),
+};
 
 function loadAction(x, y, actions) {
   const tmp = new PIXI.AnimatedSprite(ActionMap[actions]);
-  // console.log(actions);
   tmp.name = actions;
   tmp.x = x;
   tmp.y = y;
-  tmp.anchor.set(0.5);
-  tmp.scale.set(0.3);
+  tmp.anchor.set(1);
+  tmp.scale.set(100 / 431);
   tmp.animationSpeed = 0.5;
   tmp.play();
   return tmp;
@@ -34,11 +46,12 @@ function switchToAction(next) {
 function createDart() {
   const r = PIXI.Sprite.from(`./images/Kunai.png`);
   r.x = current.x;
-  r.y = current.y;
+  console.info(current.y, 'current.y ');
+  r.y = current.y - NinjaProps.height / 2;
+  console.info(r.y, 'r.y');
   r.id = 'dart' + new Date().getTime();
-  r.anchor.set(0.5);
   r.angle = 90;
-  r.scale.set(0.3);
+  r.scale.set(50 / 160);
   app.stage.addChild(r);
   return r;
 }
