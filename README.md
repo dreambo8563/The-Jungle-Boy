@@ -15,10 +15,13 @@ create sprite jsonfile with the tool https://asyed94.github.io/sprite-sheet-to-j
 - using k-v map to avoid repeated consume events
 - using anchor to correct position
 - scale sprite to fit the game
+- zIndex and sortableChildren to sort order
 
 #### How to Play
 
 - How to get the game
   - visit the github pages
   - clone the repo and start local server (like `python3 -m http.server 8080 ` )
-  - keyboard a/s/d/f to attach , arrows to move
+- Operation
+  - a/s/d/f to attach
+  - arrows to move
