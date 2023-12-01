@@ -17,6 +17,13 @@ create sprite jsonfile with the tool https://asyed94.github.io/sprite-sheet-to-j
 - scale sprite to fit the game
 - zIndex and sortableChildren to sort order
 
+#### TODO
+
+- climb the tree
+- we need a boss
+- add powerful skill
+- loading progress and start screen
+
 #### How to Play
 
 - How to get the game

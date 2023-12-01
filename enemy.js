@@ -18,6 +18,7 @@ async function loadEnemy() {
   // set the animation speed
   anim.animationSpeed = 0.1666;
   anim.x = enemyStart();
+  anim.zIndex = randomIndex();
   // 随机高位,普通位置敌人
   anim.y =
     r == 0

@@ -51,6 +51,7 @@
       loadEnemy()
 
       current = loadAction(100, groundPosition, "idle")
+      current.zIndex = randomIndex()
 
       app.stage.addChild(current);
 

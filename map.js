@@ -37,9 +37,7 @@ async function createMap() {
   }
   app.stage.sortableChildren = true;
 }
-function randomIndex() {
-  return Math.floor(Math.random() * 4);
-}
+
 async function loadTrees(num) {
   const tree1 = await PIXI.Assets.load('./images/bg/Tree_1.png');
   const tree2 = await PIXI.Assets.load('./images/bg/Tree_2.png');

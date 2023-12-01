@@ -69,3 +69,7 @@ function checkHit(object1, object2) {
     bounds1.y + bounds1.height > bounds2.y
   );
 }
+
+function randomIndex() {
+  return Math.floor(Math.random() * 4);
+}
