@@ -5,18 +5,20 @@ const DartProps = {
   width: 50,
 };
 const ActionMap = {
-  idle: animateGroup('Idle'),
-  runs: animateGroup('Run'),
-  jumps: animateGroup('Jump'),
-  slide: animateGroup('Slide'),
-  attack: animateGroup('Attack'),
-  jumpAttack: animateGroup('Jump_Attack'),
-  throw: animateGroup('Throw'),
-  jumpThrow: animateGroup('Jump_Throw'),
+  idle: animateGroup("Idle"),
+  runs: animateGroup("Run"),
+  jumps: animateGroup("Jump"),
+  slide: animateGroup("Slide"),
+  attack: animateGroup("Attack"),
+  jumpAttack: animateGroup("Jump_Attack"),
+  throw: animateGroup("Throw"),
+  jumpThrow: animateGroup("Jump_Throw"),
 };
 
 function loadAction(x, y, actions) {
+  console.log(ActionMap[actions], "ActionMap[actions]", actions);
   const tmp = new PIXI.AnimatedSprite(ActionMap[actions]);
+  console.log(tmp, "tmp");
   tmp.name = actions;
   tmp.x = x;
   tmp.y = y;
@@ -28,9 +30,11 @@ function loadAction(x, y, actions) {
 }
 
 function animateGroup(name) {
+  console.log(name, "name");
   const arr = [];
   for (i = 0; i < 10; i++) {
     const r = PIXI.Texture.from(`./images/${name}__00${i}.png`);
+    console.log(r, "r");
     arr.push(r);
   }
   return arr;
@@ -46,10 +50,10 @@ function switchToAction(next) {
 function createDart() {
   const r = PIXI.Sprite.from(`./images/Kunai.png`);
   r.x = current.x;
-  console.info(current.y, 'current.y ');
+  console.info(current.y, "current.y ");
   r.y = current.y - NinjaProps.height / 2;
-  console.info(r.y, 'r.y');
-  r.id = 'dart' + new Date().getTime();
+  console.info(r.y, "r.y");
+  r.id = "dart" + new Date().getTime();
   r.angle = 90;
   r.scale.set(50 / 160);
   app.stage.addChild(r);

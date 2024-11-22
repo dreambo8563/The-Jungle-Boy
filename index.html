@@ -2,8 +2,10 @@
 <html>
 
 <head>
-  <script src="./pixi.js"></script>
-  <script src="https://unpkg.com/@pixi/sound/dist/pixi-sound.js"></script>
+  <!-- <script src="./pixi.js"></script> -->
+  <script src="https://unpkg.com/pixi.js@7.4.2/dist/pixi.min.js"></script>
+  <!-- <script src="https://pixijs.download/release/pixi.js"></script> -->
+  <script src="https://unpkg.com/@pixi/sound@5.2.3/dist/pixi-sound.js"></script>
   <script src="./utils.js"></script>
   <script src="./position.js"></script>
   <script src="./events.js"></script>
@@ -25,7 +27,9 @@
 <body>
   <script>
     // Create the application helper and add its render target to the page
-    let app = new PIXI.Application({ background: '#1099bb', resizeTo: window, hello: true });
+    var app = new PIXI.Application({ width: 640, height: 360 ,resizeTo: window});
+ 
+      app.resizeTo = window;
     document.body.appendChild(app.view);
 
     const bg = PIXI.Sprite.from('./images/bg/BG.png')
@@ -202,6 +206,8 @@
         loadEnemy()
       }, 1000);
     })
+
+
 
 
   </script>
